@@ -1,5 +1,5 @@
 # Binance-API
-This project demonstrate use of Binance exchange API to retrieve/manipulate cryptocurrency data via Java object-oriented programming languange.  Following concepts and/or tools are implemented:
+This project demonstrate Binance exchange API requests/responses to retrieve/manipulate cryptocurrency data via Java object-oriented programming languange.  Following concepts and/or tools are implemented:
 
 - Object-oriented programming
 - REST API interface implementing Java HttpURLConnection class/objects
