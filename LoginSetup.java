@@ -19,12 +19,11 @@ public class LoginSetup {
 	// For HMAC SHA256
 	private Long unixTime = System.currentTimeMillis();					
 	private String unixTimeString = unixTime.toString();					// have top use 'Long' != primitive 'long' above in order to use toString() here
-	//System.out.println(unixTimeString);
 	private String query = "recvWindow=10000&timestamp=" + unixTimeString;
 	//System.out.println("query: " + query);
 	
 	LoginSetup () {
-		endpoint = "https://api.binance.com"; //api/v1/klines";
+		endpoint = "https://api.binance.com"; 								//api/v1/klines";
 		symbol = "?symbol=BTCUSDT";
 		limit = "limit=1000";
 		interval = "interval=15m";
@@ -36,10 +35,10 @@ public class LoginSetup {
 		return URL;
 	}
 	
+	// Generates signature
 	public String generateHmac(String secret) throws NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException {
 		Long unixTime = System.currentTimeMillis();					
 		String unixTimeString = unixTime.toString();							// have top use 'Long' != primitive 'long' above in order to use toString() here
-		//String unixTimeString = "1540441910401";
 		String recvWindow = "10000";
 		query = "recvWindow=" + recvWindow + "&timestamp=" + unixTimeString;
 		

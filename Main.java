@@ -17,13 +17,11 @@ public class Main {
 	public static void main(String[] args) throws IOException, ParseException, InvalidKeyException, NoSuchAlgorithmException {
 		
 		String secret = "Enter your secret key";
-		String apiKey = "Enter your api key";
+		String apiKey = "Kenter your api key";
 		
 		LoginSetup login = new LoginSetup();
 		Trade trade = new Trade();
-		FileRW file = new FileRW();
 		SMA sma = new SMA();
-		
 		
 		// Get Kline ===========================================
 		String kline = trade.getKline(login);
@@ -36,7 +34,6 @@ public class Main {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String prettyJson = gson.toJson(jsonArray);
 		System.out.println(prettyJson);
-		//file.writeFile(prettyJson.toString());
 		
 		// Get account info ==========================================
 		String query = login.generateHmac(secret);
@@ -47,7 +44,8 @@ public class Main {
 		System.out.println(prettyJson);
 		//trade.getAccount(apiKey, signature, login);
 		
-		sma.SMA(jsonArray, 9);								// call 'SMA' method setting Simple Moving Average = 9 days
+		sma.SMA(jsonArray, 9);										// call 'SMA' method setting Simple Moving Average = 9 days
+		System.out.println("Output file wrote to path: " + System.getProperty("user.dir"));
 	}
 
 }

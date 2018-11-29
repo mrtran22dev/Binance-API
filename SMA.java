@@ -47,11 +47,10 @@ public class SMA {
 			kline.close = Double.parseDouble((String) arr.get(4));	//arr.get(4);					// String type
 			kline.sma = "n/a";
 			
-			//if (j<24) {
+
 			if (j<days-1) {
 				closeArray[j] = (double) kline.close;
 				klineArray.add(kline);
-			//} else if (j==24) {
 			} else if (j==days-1) {
 				closeArray[j] = (double) kline.close;
 				for (double value : closeArray) {
@@ -60,7 +59,7 @@ public class SMA {
 				}
 				kline.sma = sum/days;
 				klineArray.add(kline);
-			} else {	// j>24
+			} else {														// j>24
 				sum = 0;
 				for(int n=0; n<closeArray.length-1; n++) {					// shift existing array to left
 					closeArray[n] = closeArray[n+1];

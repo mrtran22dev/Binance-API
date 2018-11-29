@@ -22,7 +22,6 @@ public class Trade {
 	private String host;
 	
 	Trade() throws MalformedURLException, NullPointerException {
-		//url = new URL(null);
 		url = null;
 	}
 	
@@ -55,7 +54,6 @@ public class Trade {
 	}
 	
 	private URL URL(String string) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -63,8 +61,8 @@ public class Trade {
 		String resource = "/api/v3/account";
 		url = new URL(l.endpoint + resource + "?" + query);
 		
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection(); 		// (HttpURLConnection) = casting a URLConnection with support for HTTP-specific features. HttpURLConnection is abstract class and CANNOT be instantiated																		
-																				// url.openConnection() returns URLConnection instance	
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection(); 			// (HttpURLConnection) = casting a URLConnection with support for HTTP-specific features. HttpURLConnection is abstract class and CANNOT be instantiated																		
+																					// url.openConnection() returns URLConnection instance	
 		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 		conn.setRequestProperty("X-MBX-APIKEY", apiKey);

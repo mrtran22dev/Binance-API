@@ -13,21 +13,21 @@ public class FileRW {
 	int fileCount;
 	
 	FileRW () {
-		filePath = "C:\\Users\\mt\\Desktop\\Code Test\\Java\\Binance";
-		fileName = new File(filePath + "\\json.txt");
+		//filePath = "C:\\Users\\mt\\Desktop\\Code Test\\Java\\Binance";
+		filePath = System.getProperty("user.dir");
+		fileName = new File(filePath + "\\data.txt");
 		fileCount = 0;
 	}
 	
 	public void writeFile (String json) throws IOException {
 
-		while (fileName.exists())  {									// if filename already exist, appends count # to file suffix 
+		while (fileName.exists())  {											// if filename already exist, appends count # to file suffix 
 			fileCount++;
-			fileName = new File(filePath + "\\json" + fileCount + ".txt");
+			fileName = new File(filePath + "\\data" + fileCount + ".txt");
 		}
 		
-		FileWriter fw = new FileWriter(fileName, true);	// 'true' parameter enables append to file
+		FileWriter fw = new FileWriter(fileName, true);							// 'true' parameter enables append to file
 		BufferedReader br = new BufferedReader(new StringReader(json));
-		//String json = conn.connect();				// experimenting with "json.split(System.getProperty("line.separator"));"
 		
 		while (true) {
 			String line = br.readLine();
