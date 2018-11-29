@@ -9,6 +9,6 @@ This project demonstrate use of Binance exchange API to retrieve/manipulate cryp
 
 NOTE: In the Main.java class file, replace the 'secret' and 'apiKey' variable values with your own Binance user secret & api key.  The ones provided below are NOT valid.  The keys will need to be valid in order for REST request/response to be successful.
 
-Example:
-String secret = "aBcdYr2feZqVVgT1rneOl2z4Rf0MgBYNzGVkF2TJA3GrlBoNWmbvjLWcRfOGIpWJ";
-String apiKey = "bDdOEYwtaz7saHQIvsF3meDMLJggr5fnYgz1FrvqbEzGeMZW0EstPhiGVCmlnAbC";
+Example: <br />
+String secret = "aBcdYr2feZqVVgT1rneOl2z4Rf0MgBYNzGVkF2TJA3GrlBoNWmbvjLWcRfOGIpWJ"; <br />
+String apiKey = "bDdOEYwtaz7saHQIvsF3meDMLJggr5fnYgz1FrvqbEzGeMZW0EstPhiGVCmlnAbC"; <br />
