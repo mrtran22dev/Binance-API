@@ -4,7 +4,8 @@ This project demonstrates utilizing Binance exchange API requests/responses to r
 - REST API interface utilizing Java HttpURLConnection class/objects
 - Maven dependency gson-2.8.5.jar library - to format JSON response to print 'pretty'
 - Manipulation of data points from REST response to calculation Simple Moving Average
-- Write data points and Simple Moving Average calculation to output file (CSV format).  Output file writes to default system user path
+- Retrieve Binance user account information via REST request
+- Write data points and Simple Moving Average calculation to output file (CSV format).  Output file (data<i>x</i>.txt) writes to default system user path 
 
 <b><i><u>NOTE:</b></i></u> A runnable JAR files has also been uploaded with this project.  You may download the JAR file to your local computer, and run it in Windows command-line interface via: "java -jar binance.jar".  
 
