@@ -3,10 +3,8 @@ package com.binance;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-
 import org.apache.commons.codec.binary.Hex;
 
 public class LoginSetup {
@@ -18,12 +16,12 @@ public class LoginSetup {
 	
 	// For HMAC SHA256
 	private Long unixTime = System.currentTimeMillis();					
-	private String unixTimeString = unixTime.toString();					// have top use 'Long' != primitive 'long' above in order to use toString() here
+	private String unixTimeString = unixTime.toString();											// have top use 'Long' != primitive 'long' above in order to use toString() here
 	private String query = "recvWindow=10000&timestamp=" + unixTimeString;
 	//System.out.println("query: " + query);
 	
 	LoginSetup () {
-		endpoint = "https://api.binance.com"; 								//api/v1/klines";
+		endpoint = "https://api.binance.com"; 														//api/v1/klines";
 		symbol = "?symbol=BTCUSDT";
 		limit = "limit=1000";
 		interval = "interval=15m";
@@ -38,7 +36,7 @@ public class LoginSetup {
 	// Generates signature
 	public String generateHmac(String secret) throws NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException {
 		Long unixTime = System.currentTimeMillis();					
-		String unixTimeString = unixTime.toString();							// have top use 'Long' != primitive 'long' above in order to use toString() here
+		String unixTimeString = unixTime.toString();												// have to use 'Long' != primitive 'long' above in order to use toString() here
 		String recvWindow = "10000";
 		query = "recvWindow=" + recvWindow + "&timestamp=" + unixTimeString;
 		

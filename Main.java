@@ -4,48 +4,58 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+//import com.google.gson.JsonParseException;
+
 
 public class Main {
 
-	public static void main(String[] args) throws IOException, ParseException, InvalidKeyException, NoSuchAlgorithmException {
+	public static void main(String[] args) { //throws IOException, InvalidKeyException, NoSuchAlgorithmException  {
 		
-		String secret = "Enter your secret key";
-		String apiKey = "Kenter your api key";
-		
-		LoginSetup login = new LoginSetup();
-		Trade trade = new Trade();
-		SMA sma = new SMA();
-		
-		// Get Kline ===========================================
-		String kline = trade.getKline(login);
-		System.out.println("GET KLINE: " + kline);
-		System.out.println("status code: " + trade.getStatusCode());
-		System.out.println("host: " + trade.getHost());
-		JSONParser parser = new JSONParser();
-		JSONArray jsonArray = (JSONArray) parser.parse(kline);
-		System.out.println("JSONArray[0]: " + jsonArray.get(0));
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String prettyJson = gson.toJson(jsonArray);
-		System.out.println(prettyJson);
-		
-		// Get account info ==========================================
-		String query = login.generateHmac(secret);
-		String account = trade.getAccount(apiKey, query, login);
-		System.out.println("ACCOUNT: " + account);
-		JSONObject jsonObject = (JSONObject) parser.parse(account);
-		prettyJson = gson.toJson(jsonObject);
-		System.out.println(prettyJson);
-		//trade.getAccount(apiKey, signature, login);
-		
-		sma.SMA(jsonArray, 9);										// call 'SMA' method setting Simple Moving Average = 9 days
-		System.out.println("Output file wrote to path: " + System.getProperty("user.dir"));
+		try {
+			String secret = "ulVEFfRkliPEob5Go9mEPxDIuxWnGfa2qCSnlOYyRuSEmpwUcpQAhrvzT7UiJJkl";		// dummy secret key
+			String apiKey = "6AilactyuNx2INdp7kedFQyFKcOUyCPTFw1bQxSQua6tnQ2bPN7RA00OpLM54rFJ";		// dummy api key
+				
+			LoginSetup login = new LoginSetup();
+			Trade trade = new Trade();
+			SMA sma = new SMA();
+			
+			// Get Kline ===========================================
+			String kline = trade.getKline(login);
+			System.out.println("GET KLINE: " + kline);
+			JsonParser parser = new JsonParser();
+			JsonArray jsonArray = (JsonArray) parser.parse(kline);
+			//System.out.println("JSONArray[0]: " + jsonArray.get(0));									// check
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			String prettyJson = gson.toJson(jsonArray);
+			System.out.println(prettyJson);
+			
+			// Get account info ==========================================
+			String query = login.generateHmac(secret);
+			String account = trade.getAccount(apiKey, query, login);
+			System.out.println("\nACCOUNT: " + account);
+			JsonObject jsonObject = (JsonObject) parser.parse(account);
+			prettyJson = gson.toJson(jsonObject);
+			System.out.println(prettyJson);
+			
+			sma.calcSMA(jsonArray, 9);																	// call 'calcSMA' method setting Simple Moving Average = 9 days
+			System.out.println("\nStatus code: " + trade.getStatusCode());
+			System.out.println("Host: " + trade.getHost());
+			System.out.println("\nACCOUNT: " + account);
+			System.out.println("Output file wrote to "
+					+ "path: " + System.getProperty("user.dir"));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvalidKeyException ike) {
+			ike.printStackTrace();
+		} catch (NoSuchAlgorithmException ae) {
+			ae.printStackTrace();
+		}
 	}
 
 }

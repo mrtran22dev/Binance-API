@@ -2,19 +2,13 @@ package com.binance;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-
-import org.apache.commons.codec.binary.Hex;
 
 public class Trade {
 	private URL url;
@@ -33,12 +27,12 @@ public class Trade {
 		String resource = "/api/v1/klines";
 		url = new URL(l.endpoint + resource + l.symbol + "&" + l.limit + "&" + l.interval);
 		
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection(); 		// (HttpURLConnection) = casting a URLConnection with support for HTTP-specific features. HttpURLConnection is abstract class and CANNOT be instantiated																		
-																				// url.openConnection() returns URLConnection instance	
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection(); 			// (HttpURLConnection) = casting a URLConnection with support for HTTP-specific features. HttpURLConnection is abstract class and CANNOT be instantiated																		
+																					// url.openConnection() returns URLConnection instance	
 		conn.setRequestMethod("GET");
 		//conn.setRequestProperty("Content-Type", "application/json");
-		conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 		//conn.setRequestProperty("charset", "utf-8");
+		conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 	    conn.connect();
 	    InputStream is = conn.getInputStream();
 	    
@@ -51,10 +45,6 @@ public class Trade {
 	    statusCode = conn.getResponseCode();
 	    host = url.getHost();
 		return json;
-	}
-	
-	private URL URL(String string) {
-		return null;
 	}
 
 	public String getAccount(String apiKey, String query, LoginSetup l) throws NoSuchAlgorithmException, InvalidKeyException, IOException {

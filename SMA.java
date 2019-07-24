@@ -5,22 +5,25 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.TimeZone;
-
-import org.json.simple.JSONArray;
+import com.google.gson.JsonArray;
 
 public class SMA {
+	
+	SMA() {												// Constructor
+		// nothing
+		System.out.println("Constructor created");
+	}
 	
 	class Candle {
 		private Object time, open, high, low, close, sma;
 	}
-	//Candle c = new Candle();
 	Candle cTemp = new Candle();
 	
 	private ArrayList<Candle> klineArray = new ArrayList<Candle>(); 
-	private JSONArray arr = new JSONArray(); 
+	private JsonArray arr = new JsonArray();
 	FileRW writer = new FileRW();
 	
-	public void SMA (JSONArray jsonArray, int days) throws IOException {
+	public void calcSMA(JsonArray jsonArray, int days) throws IOException {
 		
 		//System.out.println(jsonSMA25.size());
 
@@ -31,28 +34,27 @@ public class SMA {
 		String klineString = "";
 		for (int j=0;j<jsonArray.size();j++) {
 
-			Candle kline = new Candle();				// ***** had to create Candle object here (inside loop) to keep creating a new instance??
-			arr = (JSONArray) jsonArray.get(j);	
-			//kline.time = arr.get(0);					// Long type
-			//kline.open = arr.get(1);					// String type
-			//kline.high = arr.get(2);					// String type
-			//kline.low = arr.get(3);					// String type
-			//kline.close = arr.get(4);					// String type
+			Candle kline = new Candle();									// ***** had to create Candle object here (inside loop) to keep creating a new instance??
+			arr = (JsonArray) jsonArray.get(j);	
+			//kline.time = arr.get(0);										// returns Long type
+			//kline.open = arr.get(1);										// returns String type
+			//kline.high = arr.get(2);										// returns String type
+			//kline.low = arr.get(3);										// returns String type
+			//kline.close = arr.get(4);										// returns String type
 			
 			// Casting objects above to type 'double'
-			kline.time = LocalDateTime.ofInstant(Instant.ofEpochMilli((long) arr.get(0)), TimeZone.getDefault().toZoneId());
-			kline.open = Double.parseDouble((String) arr.get(1));	//arr.get(1);					// String type
-			kline.high = Double.parseDouble((String) arr.get(2));	//arr.get(2);					// String type
-			kline.low = Double.parseDouble((String) arr.get(3));	//arr.get(3);						// String type
-			kline.close = Double.parseDouble((String) arr.get(4));	//arr.get(4);					// String type
+			kline.time = LocalDateTime.ofInstant(Instant.ofEpochMilli(arr.get(0).getAsLong()), TimeZone.getDefault().toZoneId());
+			kline.open = (arr.get(1).getAsDouble());						//arr.get(1) returns String type
+			kline.high = (arr.get(2).getAsDouble());						//arr.get(2) returns String type
+			kline.low = (arr.get(3).getAsDouble());							//arr.get(3) returns String type
+			kline.close = (arr.get(4).getAsDouble());						//arr.get(4) returns String type
 			kline.sma = "n/a";
 			
-
 			if (j<days-1) {
-				closeArray[j] = (double) kline.close;
+				closeArray[j] = (Double) kline.close;
 				klineArray.add(kline);
 			} else if (j==days-1) {
-				closeArray[j] = (double) kline.close;
+				closeArray[j] = (Double) kline.close;
 				for (double value : closeArray) {
 					sum = sum + value;
 					//System.out.println(value);
@@ -64,7 +66,7 @@ public class SMA {
 				for(int n=0; n<closeArray.length-1; n++) {					// shift existing array to left
 					closeArray[n] = closeArray[n+1];
 				}
-				closeArray[days-1] = (double) kline.close;
+				closeArray[days-1] = (Double) kline.close;
 				for (double value : closeArray) {
 					sum = sum + value;
 				}
@@ -80,7 +82,8 @@ public class SMA {
 			
 		}
 		
-		//System.out.println(klineString);
+		//System.out.println(klineString);									// check
 		writer.writeFile(klineString);	
-	}
+	}	
+
 }

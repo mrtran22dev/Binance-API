@@ -13,7 +13,6 @@ public class FileRW {
 	int fileCount;
 	
 	FileRW () {
-		//filePath = "C:\\Users\\mt\\Desktop\\Code Test\\Java\\Binance";
 		filePath = System.getProperty("user.dir");
 		fileName = new File(filePath + "\\data.txt");
 		fileCount = 0;
@@ -39,6 +38,6 @@ public class FileRW {
 			}
 		}
 	    br.close();
-		fw.close();										// Need to close writing to file before parsing JSON file below 
+		fw.close();																// Need to close writing to file before parsing JSON file below 
 	}
 }
