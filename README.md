@@ -1,5 +1,5 @@
 # Binance-API
-This project demonstrates utilizing Binance exchange API requests/responses to retrieve/manipulate cryptocurrency data via Java object-oriented programming languange.  Following concepts and/or tools are implemented:
+This project demonstrates utilizing Binance cryptocurrency exchange API requests/responses to retrieve/manipulate data via Java object-oriented programming languange.  Following concepts and/or tools are implemented:
 
 - REST API interface utilizing Java HttpURLConnection class/objects
 - Maven dependency gson-2.8.5.jar library - to format JSON response to print 'pretty'
